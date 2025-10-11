@@ -1,0 +1,21 @@
+{
+  "name": "piscine-sprint-2-project-days-calendar",
+  "version": "1.0.0",
+  "description": "There are some commemorative days which occur annually, but not on a fixed date.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "http-server",
+    "test": "node --test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ike-agu/Piscine-Sprint-2-Project-Days-Calendar.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ike-agu/Piscine-Sprint-2-Project-Days-Calendar/issues"
+  },
+  "homepage": "https://github.com/ike-agu/Piscine-Sprint-2-Project-Days-Calendar#readme"
+}
