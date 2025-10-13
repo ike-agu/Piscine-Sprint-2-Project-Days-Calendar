@@ -1,12 +1,57 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-  <script type="module" src="common.mjs"></script>
-  <script type="module" src="web.mjs"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- <script type="module" src="common.mjs"></script> -->
+  <script defer type="module" src="web.mjs"></script>
+  <title>Calendar App</title>
 </head>
 
 <body>
+  <h1 id="curMonthYear"></h1>
+  <!-- Btns container -->
+  <div>
+    <button id="btn-back">
+      < </button>
+        <!-- <p>Current Month</p> -->
+        <button id="btn-forward"> > </button>
+  </div>
+
+  <!-- Month and Year Selection -->
+  <div>
+    <label for="monthSelect"></label>
+    <select name="" id="monthSelect">
+      <option value="0" placeholder="Month">Month</option>
+    </select>
+
+    <label for="yearSelect"></label>
+    <select name="yearSelect" id="yearSelect">
+      <option value="0" placeholder="Year">Year</option>
+    </select>
+  </div>
+
+  <br>
+  <!-- Calendar Container -->
+  <div id="calendar">
+    <table>
+      <thead>
+        <tr>
+          <th>Mon</th>
+          <th>Tue</th>
+          <th>Wed</th>
+          <th>Thur</th>
+          <th>Fri</th>
+          <th>Sat</th>
+          <th>Sun</th>
+        </tr>
+      </thead>
+      <tbody>
+
+      </tbody>
+    </table>
+  </div>
 </body>
 
 </html>
