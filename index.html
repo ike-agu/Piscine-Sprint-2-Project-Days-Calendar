@@ -1,12 +1,57 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-  <script type="module" src="common.mjs"></script>
-  <script type="module" src="web.mjs"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- <script type="module" src="common.mjs"></script>
+  <script type="module" src="web.mjs"></script> -->
+  <title>Calendar App</title>
 </head>
 
 <body>
+  <!-- Month and Year Selection -->
+  <label for="monthSelect">Month:</label>
+  <select name="" id="monthSelect">
+    <option value="0">January</option>
+    <option value="1">February</option>
+    <option value="2">March</option>
+    <option value="3">April</option>
+    <option value="4">May</option>
+    <option value="5">June</option>
+    <option value="6">July</option>
+    <option value="7">August</option>
+    <option value="8">September</option>
+    <option value="9">October</option>
+    <option value="10">November</option>
+    <option value="11">December</option>
+  </select>
+
+  <label for="yearSelect">Year:</label>
+  <select name="yearSelect" id="yearSelect"></select>
+
+  <!-- Calendar Container -->
+    <br><br>
+  <div id="calendar">
+    <table>
+      <tr>
+        <th>Mon</th>
+        <th>Tue</th>
+        <th>Wed</th>
+        <th>Thur</th>
+        <th>Fri</th>
+        <th>Sat</th>
+        <th>Sun</th>
+      </tr>
+      <tr></tr>
+      <tr></tr>
+      <tr></tr>
+      <tr></tr>
+    </table>
+  </div>
+
+
+
 </body>
 
 </html>
