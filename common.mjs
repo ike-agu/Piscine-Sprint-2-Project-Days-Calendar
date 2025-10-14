@@ -3,3 +3,9 @@
 export function getGreeting() {
   return "Hello";
 }
+
+
+export function getDaysInMonth(year, monthIndex){
+const lastDayOfTheMonth = new Date(year, monthIndex + 1, 0)
+return lastDayOfTheMonth.getDate()
+}
