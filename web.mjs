@@ -49,7 +49,6 @@ if(row.children.length > 0 ){
   }
 }
 
-
 window.onload = function() {
     // document.querySelector("body").innerText = `${getGreeting()} - there are ${daysData.length} known days`;
     renderCalendar(2025, 9); // October 2025 (monthIndex = 9)
