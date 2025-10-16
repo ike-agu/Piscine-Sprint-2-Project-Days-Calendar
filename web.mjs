@@ -1,5 +1,32 @@
-import { placeOccurrences } from "./common.mjs";
+import { placeOccurrences, populateSelectors, syncSelectors } from "./common.mjs";
 import { getDaysInMonth } from "./common.mjs";
+
+// ======= DOM ELEMENTS =======
+const monthSelect = document.getElementById("monthSelect");
+const yearSelect = document.getElementById("yearSelect");
+
+// ======= INITIAL DATE =======
+let today = new Date();
+let currentDay = today.getDate();
+let currentYear = today.getFullYear();
+let currentMonth = today.getMonth() + 1;
+
+// ======= EVENT HANDLERS =======
+monthSelect.addEventListener("change", () => {
+  currentMonth = Number(monthSelect.value);
+  updateCalendar(currentYear, currentMonth);
+});
+
+yearSelect.addEventListener("change", () => {
+  currentYear = Number(yearSelect.value);
+  updateCalendar(currentYear, currentMonth);
+});
+
+// Update calendar + events together
+export function updateCalendar(year, month) {
+  renderCalendar(year, month);
+  placeOccurrences(year);
+}
 
 //---render Calendar for a given Year and Month----
 function renderCalendar(year, monthIndex) {
@@ -34,7 +61,7 @@ function renderCalendar(year, monthIndex) {
       row = document.createElement("tr");
     }
   }
-  
+
   //handle left over days cells after the month is over
   if (row.children.length > 0) {
     while (row.children.length < 7) {
@@ -45,15 +72,13 @@ function renderCalendar(year, monthIndex) {
   }
 }
 
+// ======= INITIAL SETUP =======
 const render = function() {
-    const today = new Date();
-    const currentDay = today.getDate();
-    const currentYear = today.getFullYear();
-    const currentMonth = today.getMonth() + 1;
+  populateSelectors(monthSelect, yearSelect);
+  syncSelectors(monthSelect, yearSelect, currentYear, currentMonth);
 
-    renderCalendar(2025, 9); // October 2025 (monthIndex = 9)
-    placeOccurrences(currentYear);
+  renderCalendar(currentYear, currentMonth); // October 2025 (monthIndex = 9)
+  placeOccurrences(currentYear);
 };
-window.onload = render
- 
 
+window.onload = render
