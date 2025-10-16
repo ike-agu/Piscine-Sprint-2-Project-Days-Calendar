@@ -1,9 +1,10 @@
-import { placeOccurrences, populateSelectors, syncSelectors } from "./common.mjs";
-import { getDaysInMonth } from "./common.mjs";
+import { placeOccurrences, populateSelectors, syncSelectors, getDaysInMonth } from "./common.mjs";
 
 // ======= DOM ELEMENTS =======
 const monthSelect = document.getElementById("monthSelect");
 const yearSelect = document.getElementById("yearSelect");
+const prevBtn = document.getElementById("btn-back");
+const nextBtn = document.getElementById("btn-forward");
 
 // ======= INITIAL DATE =======
 let today = new Date();
@@ -12,6 +13,26 @@ let currentYear = today.getFullYear();
 let currentMonth = today.getMonth() + 1;
 
 // ======= EVENT HANDLERS =======
+prevBtn.addEventListener("click", () => {
+  currentMonth--;
+  if (currentMonth < 1) {
+    currentMonth = 12;
+    currentYear--;
+  }
+  syncSelectors(monthSelect, yearSelect, currentYear, currentMonth);
+  updateCalendar(currentYear, currentMonth);
+});
+
+nextBtn.addEventListener("click", () => {
+  currentMonth++;
+  if (currentMonth > 12) {
+    currentMonth = 1;
+    currentYear++;
+  }
+  syncSelectors(monthSelect, yearSelect, currentYear, currentMonth);
+  updateCalendar(currentYear, currentMonth);
+});
+
 monthSelect.addEventListener("change", () => {
   currentMonth = Number(monthSelect.value);
   updateCalendar(currentYear, currentMonth);
@@ -73,7 +94,7 @@ function renderCalendar(year, monthIndex) {
 }
 
 // ======= INITIAL SETUP =======
-const render = function() {
+const render = function () {
   populateSelectors(monthSelect, yearSelect);
   syncSelectors(monthSelect, yearSelect, currentYear, currentMonth);
 
@@ -81,4 +102,4 @@ const render = function() {
   placeOccurrences(currentYear);
 };
 
-window.onload = render
+window.onload = render;

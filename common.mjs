@@ -152,4 +152,4 @@ export function syncSelectors(monthSelect, yearSelect, year, month) {
 export function getDaysInMonth(year, monthIndex) {
   const numberOfDaysInMonth = new Date(year, monthIndex + 1, 0);
   return numberOfDaysInMonth.getDate();
-}
+};
