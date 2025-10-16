@@ -122,3 +122,10 @@ export function placeOccurrences(year) {
     cell.appendChild(div);
   });
 }
+
+// helper function to return the number of days in a Month
+export function getDaysInMonth(year, monthIndex) {
+  const numberOfDaysInMonth = new Date(year, monthIndex + 1, 0);
+  return numberOfDaysInMonth.getDate();
+}
+
