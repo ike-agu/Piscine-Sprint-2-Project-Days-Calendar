@@ -86,7 +86,7 @@ export function getNthWeekdayOfMonth(year, month, weekday, occurrence) {
   return result.getMonth() === month - 1 ? result : null;
 }
 
-// ======== OCCURRENCE PLACEMENT ========
+// Place occurrences on the calendar
 export function placeOccurrences(year) {
   const calendar = document.querySelector("#calendar");
   errorHandle(!calendar, "Calendar element with id 'calendar' not found.");
@@ -123,9 +123,33 @@ export function placeOccurrences(year) {
   });
 }
 
+// Populate month and year selectors
+export function populateSelectors(monthSelect, yearSelect) {
+  // Populate months
+  Object.entries(months).forEach(([name, value]) => {
+    const opt = document.createElement("option");
+    opt.value = value;
+    opt.textContent = name;
+    monthSelect.appendChild(opt);
+  });
+
+  // Populate years (1900–2100)
+  for (let y = 1900; y <= 2100; y++) {
+    const opt = document.createElement("option");
+    opt.value = y;
+    opt.textContent = y;
+    yearSelect.appendChild(opt);
+  }
+}
+
+// Sync selectors with given month and year
+export function syncSelectors(monthSelect, yearSelect, year, month) {
+  monthSelect.value = month;
+  yearSelect.value = year;
+}
+
 // helper function to return the number of days in a Month
 export function getDaysInMonth(year, monthIndex) {
   const numberOfDaysInMonth = new Date(year, monthIndex + 1, 0);
   return numberOfDaysInMonth.getDate();
 }
-
