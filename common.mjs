@@ -4,8 +4,9 @@ export function getGreeting() {
   return "Hello";
 }
 
-// helper function to get the last day of the Month
-export function getDaysInMonth(year, monthIndex){
-const lastDayOfTheMonth = new Date(year, monthIndex + 1, 0)
-return lastDayOfTheMonth.getDate()
+// helper function to return the number of days in a Month
+export function getDaysInMonth(year, monthIndex) {
+  const numberOfDaysInMonth = new Date(year, monthIndex + 1, 0);
+  return numberOfDaysInMonth.getDate();
 }
+
