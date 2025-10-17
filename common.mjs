@@ -49,8 +49,7 @@ export const daysInMonth = (year, month) => [31, isLeapYear(year) ? 29 : 28, 31,
 export const pad = (n) => String(n).padStart(2, "0");
 
 // Format date as YYYY-MM-DD
-export const formatDate = (date) => `${date.getFullYear()}${pad(date.getMonth() + 1)}${pad(date.getDate())}`;
-// export const formatDate = (year, month, day) => `${year}-${pad(month)}-${pad(day)}`;
+export const formatDate = (year, month, day) => `${year}-${pad(month)}-${pad(day)}`;
 
 // Must return the string value — your original was missing `return`
 export const dateString = (date) => {
@@ -65,7 +64,70 @@ const errorHandle = (condition, message) => {
 };
 
 // ======== MAIN FUNCTION ========
+
 // Render calendar for given month and year
+export function renderCalendar(year, monthIndex) {
+  //  if table exist, remove gaps between cells
+  const table = document.querySelector("#calendar table");
+  if (table) {
+    Object.assign(table.style, {
+      width: "100%",
+      borderCollapse: "collapse",
+      tableLayout: "fixed",
+    });
+  }
+  const totalDaysInMonth = daysInMonth(year, monthIndex);
+  let firstDay = firstDayOfMonth(year, monthIndex);
+
+   firstDay === 0 ? firstDay = 6 : firstDay = firstDay - 1;
+
+  //get table body and fill it up with numbers
+  const tableBody = document.querySelector("#calendar tbody");
+  errorHandle(!tableBody, "Calendar body not found");
+
+  tableBody.innerHTML = ""; //clear the old rows
+
+  //----Base styling------
+  const baseCellStyle = {
+    width: "14.28%",
+    height: "100px",
+    verticalAlign: "top",
+    padding: "10px",
+    boxSizing: "border-box",
+    border: "1px solid #ccc",
+    position: "relative",
+    color: "#000",
+  };
+
+  function createCells(content ="", date = null){
+    const cell = document.createElement("td")
+    Object.assign(cell.style, baseCellStyle);
+    if (content) cell.textContent = content;
+    if (date) cell.dataset.date = formatDate(year, monthIndex, date);
+    return cell;
+  }
+
+  //create empty cells before day 1
+  let row = document.createElement("tr");
+  for (let i = 0; i < firstDay; i++) row.appendChild(createCells());
+
+  //loop through each day of the month to fill in the actual day numbers
+  for (let day = 1; day <= totalDaysInMonth; day++) {
+    row.appendChild(createCells(day, day));
+
+    //check if the row is full (then Calendar moves to new row)
+    if ((firstDay + day) % 7 === 0) {
+      tableBody.appendChild(row);
+      row = document.createElement("tr");
+    }
+  }
+
+  //handle left over days cells after the month is over
+  if (row.children.length > 0) {
+    while (row.children.length < 7) row.appendChild(createCells());
+    tableBody.appendChild(row);
+  }
+}
 
 // Calculate nth weekday of a month
 export function getNthWeekdayOfMonth(year, month, weekday, occurrence) {
@@ -151,9 +213,3 @@ export function syncSelectors(monthSelect, yearSelect, year, month) {
   monthSelect.value = month;
   yearSelect.value = year;
 }
-
-// helper function to return the number of days in a Month
-export function getDaysInMonth(year, monthIndex) {
-  const numberOfDaysInMonth = new Date(year, monthIndex + 1, 0);
-  return numberOfDaysInMonth.getDate();
-};
