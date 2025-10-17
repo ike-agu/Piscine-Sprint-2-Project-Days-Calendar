@@ -45,8 +45,12 @@ export const lastDayOfMonth = (year, month) => new Date(year, month, 0).getDay()
 // Days in month (handles leap year)
 export const daysInMonth = (year, month) => [31, isLeapYear(year) ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31][month - 1];
 
+// Pad single digit numbers with leading zero
+export const pad = (n) => String(n).padStart(2, "0");
+
 // Format date as YYYY-MM-DD
-export const formatDate = (year, month, day) => `${year}-${String(month).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
+export const formatDate = (date) => `${date.getFullYear()}${pad(date.getMonth() + 1)}${pad(date.getDate())}`;
+// export const formatDate = (year, month, day) => `${year}-${pad(month)}-${pad(day)}`;
 
 // Must return the string value — your original was missing `return`
 export const dateString = (date) => {
