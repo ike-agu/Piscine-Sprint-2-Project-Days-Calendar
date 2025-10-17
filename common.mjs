@@ -65,8 +65,18 @@ const errorHandle = (condition, message) => {
 };
 
 // ======== MAIN FUNCTION ========
+
 // Render calendar for given month and year
 export function renderCalendar(year, monthIndex) {
+  //  if table exist, remove gaps between cells
+  const table = document.querySelector("#calendar table");
+  if (table) {
+    Object.assign(table.style, {
+      width: "100%",
+      borderCollapse: "collapse",
+      tableLayout: "fixed",
+    });
+  }
   const totalDaysInMonth = daysInMonth(year, monthIndex);
   let firstDay = firstDayOfMonth(year, monthIndex);
 
@@ -74,7 +84,7 @@ export function renderCalendar(year, monthIndex) {
 
   //get table body and fill it up with numbers
   const tableBody = document.querySelector("#calendar tbody");
-  errorHandle(!tableBody, "Calendar body not found")
+  errorHandle(!tableBody, "Calendar body not found");
 
   tableBody.innerHTML = ""; //clear the old rows
 
@@ -106,7 +116,7 @@ export function renderCalendar(year, monthIndex) {
   for (let day = 1; day <= totalDaysInMonth; day++) {
     row.appendChild(createCells(day, day));
 
-    //Formula checks and detect if the row is full i.e 7days which make up 1 week (then Calendar moves to new row)
+    //check if the row is full (then Calendar moves to new row)
     if ((firstDay + day) % 7 === 0) {
       tableBody.appendChild(row);
       row = document.createElement("tr");
@@ -118,9 +128,6 @@ export function renderCalendar(year, monthIndex) {
     while (row.children.length < 7) row.appendChild(createCells());
     tableBody.appendChild(row);
   }
-  //  if table exist, remove gaps between cells
-  const table = document.querySelector("#calendar table");
-  if (table) table.style.borderCollapse = "collapse";
 }
 
 // Calculate nth weekday of a month
@@ -207,4 +214,3 @@ export function syncSelectors(monthSelect, yearSelect, year, month) {
   monthSelect.value = month;
   yearSelect.value = year;
 }
-

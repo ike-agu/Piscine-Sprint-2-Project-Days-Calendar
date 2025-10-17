@@ -4,7 +4,6 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- <script type="module" src="common.mjs"></script> -->
   <script defer type="module" src="web.mjs"></script>
   <title>Calendar App</title>
 </head>
@@ -12,22 +11,20 @@
 <body>
   <h1 id="curMonthYear"></h1>
   <!-- Btns container -->
-  <div>
+  <div id="btnsContainer">
     <button id="btn-back">&lt;</button>
-      <!-- <p>Current Month</p> -->
+    <p id="monthTitle"></p>
     <button id="btn-forward">&gt;</button>
   </div>
 
   <!-- Month and Year Selection -->
   <div>
-    <label for="monthSelect"></label>
-    <select name="monthSelect" id="monthSelect"></select>
-
-    <label for="yearSelect"></label>
-    <select name="yearSelect" id="yearSelect"></select>
+    <select name="monthSelect" id="monthSelect" aria-label="Month"></select>
+    <select name="yearSelect" id="yearSelect" aria-label="Year"></select>
   </div>
 
   <br>
+
   <!-- Calendar Container -->
   <div id="calendar">
     <table>
