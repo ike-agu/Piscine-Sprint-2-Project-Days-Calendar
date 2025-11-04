@@ -26,13 +26,11 @@ export const weeks = {
 // Validate year is number
 export const validateYear = (year) => {
   errorHandle( !Number.isInteger(year), "Year must be an integer.");
-  // errorHandle( (year < 1900 || year > 2100), "Year out of range (1900–2100).");
   return true;
 };
 
 // Check leap year
 export const isLeapYear = (year) => {
-  // validateYear(year); //
   return (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0;
 };
 
