@@ -23,16 +23,14 @@ export const weeks = {
 };
 
 // ======== HELPERS ========
-// Validate year range (1900–2100)
+// Validate year is number
 export const validateYear = (year) => {
   errorHandle( !Number.isInteger(year), "Year must be an integer.");
-  errorHandle( (year < 1900 || year > 2100), "Year out of range (1900–2100).");
   return true;
 };
 
 // Check leap year
 export const isLeapYear = (year) => {
-  validateYear(year);
   return (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0;
 };
 
@@ -55,7 +53,10 @@ export const formatDate = (year, month, day) => `${year}-${pad(month)}-${pad(day
 export const dateString = (date) => {
   errorHandle(!date, "Date is required.");
   errorHandle(!(date instanceof Date), `Expected a Date object, got: ${date}`);
-  return date.toISOString().split("T")[0];
+  const y = date.getFullYear();
+  const m = date.getMonth() + 1; // 1-12
+  const d = date.getDate(); // 1-31
+  return formatDate(y,m,d) //yyyy-mm-dd
 };
 
 // Error handling utility
@@ -172,7 +173,7 @@ export function placeOccurrences(year) {
     const date = getNthWeekdayOfMonth(year, month, weekday, occ);
     if (!date) return;
 
-    const cell = calendar.querySelector(`[data-date="${dateString(date)}"]`);
+    const cell = calendar.querySelector(`[data-date="${dateString(date)}"]`); //Identifies Calendar cells for each date
     if (!cell) return;
 
     const div = Object.assign(document.createElement("div"), {
@@ -199,8 +200,10 @@ export function populateSelectors(monthSelect, yearSelect) {
     monthSelect.appendChild(opt);
   });
 
-  // Populate years (1900–2100)
-  for (let y = 1900; y <= 2100; y++) {
+  // Populate years dynamically based on current Year
+  const currentYear = new Date().getFullYear();
+  const span = 200; // to set 200 years back and forward;
+  for (let y = currentYear - span; y <= currentYear + span; y++) {
     const opt = document.createElement("option");
     opt.value = y;
     opt.textContent = y;

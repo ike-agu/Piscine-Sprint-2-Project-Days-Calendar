@@ -13,3 +13,14 @@ npm-debug.log*
 
 # Build output
 dist/
+
+
+ # Editor directories and files
+.vscode/*
+!.vscode/settings.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+
+
+Piscine-Sprint-2-Project-Days-Calendar/
