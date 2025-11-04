@@ -69,23 +69,26 @@ nextBtn.addEventListener("click", () => {
   updateCalendar(currentYear, currentMonth);
 });
 
+//updates months when user select month from drop-down
 monthSelect.addEventListener("change", () => {
   currentMonth = Number(monthSelect.value);
   updateCalendar(currentYear, currentMonth);
 });
 
+//updates year when user select year from drop-down
 yearSelect.addEventListener("change", () => {
   currentYear = Number(yearSelect.value);
   updateCalendar(currentYear, currentMonth);
 });
 
+//renders dynamic title
 function renderTitle() {
   const monthName = monthSelect.options[monthSelect.selectedIndex].text;
   title.textContent = `${monthName} ${yearSelect.value}`;
   monthTitle.textContent = `${monthName}`;
 }
 
-// Update calendar + events together
+// Update calendar + events together + title 
 function updateCalendar(year, month) {
   renderTitle();
   renderCalendar(year, month);
